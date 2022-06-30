@@ -1,0 +1,25 @@
+server:
+    port: 8083
+spring:
+    data:
+        mongodb:
+            #url: localhost:27017/banca
+            uri: mongodb+srv://fyauriba:fyauriba@cluster0.alkipm8.mongodb.net/banca-account?retryWrites=true&w=majority
+    cloud:
+        discovery:
+            enabled: true
+        gateway:
+            discovery:
+                locator:
+                    enabled: true
+                    lower-case-service-id: true
+eureka:
+  instance:
+     hostname: ms-eureka
+     #hostname: eureka-service-contenedor
+     prefer-ip-address: true
+  client:
+     fetch-registry: true
+     register-with-eureka: true
+     service-url:
+        defaultZone: http://${eureka.instance.hostname}:8087/eureka/

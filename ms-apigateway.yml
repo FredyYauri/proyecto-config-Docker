@@ -1,0 +1,44 @@
+server:
+   port: 8098
+
+eureka:
+  client:
+     fetch-registry: true
+     register-with-eureka: true
+     service-url:
+        defaultZone: http://ms-eureka/eureka
+  instance:
+     hostname: ms-eureka
+     prefer-ip-address: true
+
+spring:
+  cloud:
+     discovery:
+        enabled: true
+     gateway:
+        discovery:
+          locator:
+             enabled: true
+             lower-case-service-id: true
+        routes:
+          - id: ms-account
+            uri: lb://ms-account
+            predicates:
+              - Path=/account/**
+              #si se crea más de un controladore se coloca con comas  Path=/accounts/**,/accountsdetail/**
+          - id: ms-credit
+            uri: lb://ms-credit
+            predicates:
+              - Path=/credit/**
+          - id: ms-customer
+            uri: lb://ms-customer
+            predicates:
+              - Path=/customer/**
+          - id: ms-movement
+            uri: lb://ms-movement
+            predicates:
+              - Path=/movement/**
+          - id: ms-statusaccount
+            uri: lb://ms-statusaccount
+            predicates:
+              - Path=/statusaccount/**

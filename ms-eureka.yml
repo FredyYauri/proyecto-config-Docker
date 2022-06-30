@@ -1,0 +1,12 @@
+server:
+    port: 8087
+eureka:
+  instance:
+     hostname: ms-eureka
+     #hostname: eureka-service-contenedor
+     prefer-ip-address: true
+  client:
+     fetch-registry: false
+     register-with-eureka: false
+     service-url:
+         defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
